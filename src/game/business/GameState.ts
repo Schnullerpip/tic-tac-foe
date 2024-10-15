@@ -7,7 +7,7 @@ import {
 	getCellCoordinates,
 	getCellCoordinatesInDirection,
 	getI,
-} from '../../core/util'
+} from '../model/Board'
 
 const defaultGameState = () =>
 	({
