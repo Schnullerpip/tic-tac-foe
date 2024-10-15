@@ -9,6 +9,9 @@ const { gameState, makeMove: makePlayerMove } = useGameState()
 const { makeBotMove, comment, mood } = useBot(gameState)
 
 async function handleClickCell(i: number) {
+	if (gameState.turn !== 'x') {
+		return
+	}
 	makePlayerMove(i)
 	makeBotMove()
 }
