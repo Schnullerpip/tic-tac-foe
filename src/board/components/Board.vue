@@ -1,18 +1,20 @@
 <template>
     <div class="board">
         <Cell
-            v-for="(state, i) in gameState.board"
+            v-for="(cell, i) in board"
             class="board-cell"
-            :state="state"
+            :cell
             :key="`cell-${i}`"
-            @click="makeMove(i)"
+            @click="emit('clicked-cell', i)"
         />
     </div>
 </template>
     
 <script setup lang="ts">
-import { gameState, makeMove } from '../business/GameState'
+import type { GameState } from '../../game/model/GameState'
 import Cell from './Cell.vue'
+defineProps<{ board: GameState['board'] }>()
+const emit = defineEmits<(e: 'clicked-cell', i: number) => void>()
 </script>
 
 <style scoped>

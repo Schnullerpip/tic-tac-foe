@@ -1,14 +1,13 @@
 <template>
-  <div class="cell" :class="{ unclickable: state !== undefined }">
-    {{ state }}
+  <div class="cell" :class="{ unclickable: cell !== undefined }">
+    {{ cell }}
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Cell } from '../model/Board'
-
+import type { Cell } from '../../game/model/Board'
 defineProps<{
-	state: Cell
+	cell: Cell
 }>()
 </script>
 

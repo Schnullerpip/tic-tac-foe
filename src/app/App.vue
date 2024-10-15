@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import Board from '../game/components/Board.vue'
+import Board from '../board/components/Board.vue'
 import GameOver from '../game/components/GameOver.vue'
+import { useGameState } from '../game/business/useGameState'
+
+const { gameState, makeMove } = useGameState()
 </script>
 
 <template>
     <div class="app-root">
         <!-- Game Over -->
         <transition name="fade">
-            <GameOver class="game-over"/>
+            <GameOver class="game-over" :winner="gameState.winner" />
         </transition>
 
         <!-- Board -->
-        <Board />
+        <Board :board=gameState.board @clicked-cell="makeMove" />
     </div>
 </template>
 

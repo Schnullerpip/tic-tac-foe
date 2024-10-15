@@ -1,4 +1,21 @@
-export type Cell = undefined | 'x' | 'o'
+import type { Player } from './Player'
+
+export type Cell = undefined | Player
+
+export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell]
+
+export const defaultBoard = () =>
+	[
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+	] as const satisfies Board
 
 export type CellCoordinates = [
 	number, // x

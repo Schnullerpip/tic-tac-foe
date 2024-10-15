@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { gameState } from '../business/GameState'
+defineProps<{ winner: 'x' | 'o' | 'draw' | undefined }>()
 </script>
 
 <template>
-    <div v-if="gameState.winner" class="game-over">
+    <div v-if="winner" class="game-over">
         Game Over
-        <div v-if="gameState.winner === 'draw'">Draw</div>
-        <div v-else>Winner is {{ gameState.winner }}</div>
+        <div v-if="winner === 'draw'">Draw</div>
+        <div v-else>Winner is {{ winner }}</div>
     </div>
 </template>
 
