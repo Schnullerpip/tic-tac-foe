@@ -1,14 +1,14 @@
-import { gameState } from '../game/business/useGameState'
+import type { GameState } from '../game/model/GameState'
 
 export abstract class Bot {
-	abstract chooseNextMove(): {
+	abstract chooseNextMove(gameState: GameState): Promise<{
 		comment: string
 		nextMove: number
-	}
+	}>
 }
 
 export class RandomBot extends Bot {
-	override chooseNextMove() {
+	override async chooseNextMove(gameState: GameState) {
 		const availableMoves = gameState.board
 			.map((cell, i) => (cell === undefined ? i : undefined))
 			.filter((cell) => cell !== undefined)

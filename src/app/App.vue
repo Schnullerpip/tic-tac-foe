@@ -2,8 +2,19 @@
 import Board from '../board/components/Board.vue'
 import GameOver from '../game/components/GameOver.vue'
 import { useGameState } from '../game/business/useGameState'
+import { useBot } from '../bot/useBot'
+import { useSleep } from '../core/useSleep'
+import BotComment from '../bot/components/BotComment.vue'
 
-const { gameState, makeMove } = useGameState()
+const { gameState, makeMove: makePlayerMove } = useGameState()
+const { makeBotMove, comment } = useBot(gameState)
+const { sleep } = useSleep()
+
+async function handleClickCell(i: number) {
+	makePlayerMove(i)
+	await sleep(1000)
+	makeBotMove()
+}
 </script>
 
 <template>
@@ -14,7 +25,10 @@ const { gameState, makeMove } = useGameState()
         </transition>
 
         <!-- Board -->
-        <Board :board=gameState.board @clicked-cell="makeMove" />
+        <Board :board=gameState.board @clicked-cell="handleClickCell" />
+
+        <!-- Comment -->
+        <BotComment v-if="comment" class="comment" :comment />
     </div>
 </template>
 
@@ -33,6 +47,15 @@ const { gameState, makeMove } = useGameState()
     left: 0;
     right: 0;
     height: 100px;
+}
+
+.comment {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin-bottom: 2rem;
 }
 
 .fade-enter-active,
