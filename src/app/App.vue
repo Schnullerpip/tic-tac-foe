@@ -3,16 +3,14 @@ import Board from '../board/components/Board.vue'
 import GameOver from '../game/components/GameOver.vue'
 import { useGameState } from '../game/business/useGameState'
 import { useBot } from '../bot/useBot'
-import { useSleep } from '../core/useSleep'
 import BotComment from '../bot/components/BotComment.vue'
 
 const { gameState, makeMove: makePlayerMove } = useGameState()
 const { makeBotMove, comment } = useBot(gameState)
-const { sleep } = useSleep()
 
 async function handleClickCell(i: number) {
 	makePlayerMove(i)
-	await sleep(1000)
+
 	makeBotMove()
 }
 </script>
@@ -25,7 +23,7 @@ async function handleClickCell(i: number) {
         </transition>
 
         <!-- Board -->
-        <Board :board=gameState.board @clicked-cell="handleClickCell" />
+        <Board class="board" :board=gameState.board @clicked-cell="handleClickCell" />
 
         <!-- Comment -->
         <BotComment v-if="comment" class="comment" :comment />
@@ -34,16 +32,22 @@ async function handleClickCell(i: number) {
 
 <style scoped>
 .app-root {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
+    padding-top: 250px;
+}
+
+.board {
+    position: relative;
 }
 
 .game-over {
     position: absolute;
-    top: 10vh;
+    top: 100px;
     left: 0;
     right: 0;
     height: 100px;
@@ -55,6 +59,8 @@ async function handleClickCell(i: number) {
     left: 0;
     right: 0;
 
+    padding: 1rem;
+    padding-bottom: 2rem;
     margin-bottom: 2rem;
 }
 

@@ -1,10 +1,21 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { makeMove, type GameState } from '../game/model/GameState'
-import { RandomBot } from './bot'
+import { OpenAiBot } from './OpenAiBot'
+import { OpenAiClient } from '../service/openai/OpenAiClient'
 
 export function useBot(gameState: GameState) {
-	const bot = new RandomBot()
+	const bot = new OpenAiBot(new OpenAiClient())
 	const comment = ref('')
+
+	watch(
+		() => gameState.winner,
+		async () => {
+			if (gameState.winner) {
+				const result = await bot.concludeGame(gameState)
+				comment.value = result.comment
+			}
+		},
+	)
 
 	return {
 		makeBotMove,
@@ -12,8 +23,11 @@ export function useBot(gameState: GameState) {
 	}
 
 	async function makeBotMove() {
+		if (gameState.winner) {
+			return
+		}
 		const result = await bot.chooseNextMove(gameState)
 		comment.value = result.comment
-		makeMove(result.nextMove, gameState)
+		makeMove(result.move, gameState)
 	}
 }

@@ -4,6 +4,7 @@
 .LSOverride
 Thumbs.db
 desktop.ini
+.env
 
 # IDE - VSCode
 .vscode/*

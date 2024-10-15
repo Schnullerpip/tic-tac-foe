@@ -3,7 +3,11 @@ import type { GameState } from '../game/model/GameState'
 export abstract class Bot {
 	abstract chooseNextMove(gameState: GameState): Promise<{
 		comment: string
-		nextMove: number
+		move: number
+	}>
+
+	abstract concludeGame(gameState: GameState): Promise<{
+		comment: string
 	}>
 }
 
@@ -18,7 +22,18 @@ export class RandomBot extends Bot {
 		const randomIndex = Math.floor(Math.random() * availableMoves.length)
 		return {
 			comment: 'Random move',
-			nextMove: availableMoves[randomIndex] as number,
+			move: availableMoves[randomIndex] as number,
+		}
+	}
+
+	async concludeGame(gameState: GameState): Promise<{
+		comment: string
+	}> {
+		return {
+			comment:
+				gameState.winner === 'draw' || gameState.winner === 'x'
+					? 'aww man'
+					: 'Huzzaa',
 		}
 	}
 }
