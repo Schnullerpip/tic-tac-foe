@@ -1,7 +1,7 @@
 import type { Board, Cell } from '../game/model/Board'
 import type { GameState } from '../game/model/GameState'
 import { OpenAiClient } from '../service/openai/OpenAiClient'
-import { Bot } from './bot'
+import { Bot, type BotMood } from './bot'
 
 export class OpenAiBot extends Bot {
 	constructor(private readonly openaiClient: OpenAiClient) {
@@ -10,15 +10,20 @@ export class OpenAiBot extends Bot {
 
 	async chooseNextMove(
 		gameState: GameState,
-	): Promise<{ comment: string; move: number }> {
+	): Promise<{ comment: string; move: number; mood: BotMood }> {
 		const prompt = this.getMovePrompt(gameState)
 		const response = await this.openaiClient.complete(prompt)
-		return JSON.parse(response)
+		return { ...JSON.parse(response), mood: 'happy' }
 	}
 
-	async concludeGame(gameState: GameState): Promise<{ comment: string }> {
+	async concludeGame(
+		gameState: GameState,
+	): Promise<{ comment: string; mood: BotMood }> {
 		const prompt = this.getConcedePrompt(gameState)
-		return { comment: await this.openaiClient.complete(prompt) }
+		return {
+			comment: await this.openaiClient.complete(prompt),
+			mood: gameState.winner === 'o' ? 'happy' : 'sad',
+		}
 	}
 
 	// --- private
@@ -36,7 +41,7 @@ export class OpenAiBot extends Bot {
 				: gameState.winner === 'x'
 					? 'You lost against this noname of a beginner. You are in ruins. Your reputation destroyed. Your family will leave you. Crushed.'
 					: 'Of course you won against this wannabe tic tac toe noob. You take great you in winning and you let the Player know that'
-		return `${this.getPersonalityPrompt()}${state}Explain the result of the game in 3 to 4 sentences.`
+		return `${this.getPersonalityPrompt()}${state}Explain the result of the game in 2 to 3 sentences in a concise manner.`
 	}
 
 	private getMovePrompt(gameState: GameState): string {

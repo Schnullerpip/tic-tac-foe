@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import Board from '../board/components/Board.vue'
-import GameOver from '../game/components/GameOver.vue'
-import { useGameState } from '../game/business/useGameState'
-import { useBot } from '../bot/useBot'
 import BotComment from '../bot/components/BotComment.vue'
+import { useBot } from '../bot/useBot'
+import { useGameState } from '../game/business/useGameState'
+import GameOver from '../game/components/GameOver.vue'
 
 const { gameState, makeMove: makePlayerMove } = useGameState()
-const { makeBotMove, comment } = useBot(gameState)
+const { makeBotMove, comment, mood } = useBot(gameState)
 
 async function handleClickCell(i: number) {
 	makePlayerMove(i)
-
 	makeBotMove()
 }
 </script>
@@ -26,7 +25,9 @@ async function handleClickCell(i: number) {
         <Board class="board" :board=gameState.board @clicked-cell="handleClickCell" />
 
         <!-- Comment -->
-        <BotComment v-if="comment" class="comment" :comment />
+         <transition name="fade" mode="out-in">
+            <BotComment class="comment" :comment :mood :key="comment"/>
+         </transition>
     </div>
 </template>
 
@@ -66,7 +67,7 @@ async function handleClickCell(i: number) {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 1.5s ease;
+    transition: opacity .5s ease;
 }
 
 .fade-enter-from,
