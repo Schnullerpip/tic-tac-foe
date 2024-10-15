@@ -3,9 +3,9 @@ import OpenAI from 'openai'
 export class OpenAiClient {
 	private readonly client: OpenAI
 
-	constructor() {
+	constructor(apiKey: string) {
 		this.client = new OpenAI({
-			apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+			apiKey,
 			dangerouslyAllowBrowser: true,
 		})
 	}
@@ -29,7 +29,7 @@ if (import.meta.vitest) {
 	describe('OpenAiClient', () => {
 		let client: OpenAiClient
 		beforeEach(() => {
-			client = new OpenAiClient()
+			client = new OpenAiClient(import.meta.env.VITE_OPENAI_API_KEY)
 		})
 
 		it.skip('should complete a prompt', async () => {

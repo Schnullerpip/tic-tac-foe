@@ -4,8 +4,11 @@ import { OpenAiClient } from '../service/openai/OpenAiClient'
 import { Bot, type BotMood } from './bot'
 
 export class OpenAiBot extends Bot {
-	constructor(private readonly openaiClient: OpenAiClient) {
+	private readonly openaiClient: OpenAiClient
+
+	constructor(apiKey: string) {
 		super()
+		this.openaiClient = new OpenAiClient(apiKey)
 	}
 
 	async chooseNextMove(
@@ -104,11 +107,9 @@ export class OpenAiBot extends Bot {
 if (import.meta.vitest) {
 	const { describe, it, expect, beforeEach } = import.meta.vitest
 	describe('OpenAiBot', () => {
-		let client: OpenAiClient
 		let bot: OpenAiBot
 		beforeEach(() => {
-			client = new OpenAiClient()
-			bot = new OpenAiBot(client)
+			bot = new OpenAiBot(import.meta.env.VITE_OPENAI_API_KEY)
 		})
 
 		it.skip('should give a comment and a move', async () => {

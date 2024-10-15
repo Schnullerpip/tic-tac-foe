@@ -1,11 +1,10 @@
 import { ref, watch } from 'vue'
-import { makeMove, type GameState } from '../game/model/GameState'
+import { type GameState, makeMove } from '../game/model/GameState'
 import { OpenAiBot } from './OpenAiBot'
-import { OpenAiClient } from '../service/openai/OpenAiClient'
 import type { BotMood } from './bot'
 
 export function useBot(gameState: GameState) {
-	const bot = new OpenAiBot(new OpenAiClient())
+	const bot = new OpenAiBot(import.meta.env.VITE_OPENAI_API_KEY)
 	const comment = ref('')
 	const mood = ref<BotMood>('neutral')
 
