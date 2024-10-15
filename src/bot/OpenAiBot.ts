@@ -1,4 +1,4 @@
-import type { Board, Cell } from '../game/model/Board'
+import type { Board } from '../game/model/Board'
 import type { GameState } from '../game/model/GameState'
 import { OpenAiClient } from '../service/openai/OpenAiClient'
 import { Bot, type BotMood } from './bot'
