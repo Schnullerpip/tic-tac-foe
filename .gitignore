@@ -1,3 +1,9 @@
+dist/
+
+# vercel
+.vercel/
+tsconfig.tsbuildinfo
+
 # General
 .DS_Store
 .AppleDouble
