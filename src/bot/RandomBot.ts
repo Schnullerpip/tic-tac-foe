@@ -1,9 +1,10 @@
-import type { GameState } from '../game/model/GameState'
+import type { Board } from '../game/model/Board'
+import type { Winner } from '../game/model/Player'
 import { Bot, type BotMood, type ConcludeGameResult } from './bot'
 
 export class RandomBot extends Bot {
-	override async chooseNextMove(gameState: GameState) {
-		const availableMoves = gameState.board
+	override async chooseNextMove(board: Board) {
+		const availableMoves = board
 			.map((cell, i) => (cell === undefined ? i : undefined))
 			.filter((cell) => cell !== undefined)
 		if (availableMoves.length === 0) {
@@ -17,12 +18,9 @@ export class RandomBot extends Bot {
 		}
 	}
 
-	async concludeGame(gameState: GameState): Promise<ConcludeGameResult> {
+	async concludeGame(winner: Winner): Promise<ConcludeGameResult> {
 		return {
-			comment:
-				gameState.winner === 'draw' || gameState.winner === 'x'
-					? 'aww man'
-					: 'Huzzaa',
+			comment: winner === 'draw' || winner === 'x' ? 'aww man' : 'Huzzaa',
 			mood: 'neutral',
 		}
 	}

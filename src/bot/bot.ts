@@ -1,4 +1,5 @@
-import type { GameState } from '../game/model/GameState'
+import type { Board } from '../game/model/Board'
+import type { Winner } from '../game/model/Player'
 
 export type BotMood = 'neutral' | 'happy' | 'sad'
 export type ChooseNextMoveResult = {
@@ -12,6 +13,6 @@ export type ConcludeGameResult = {
 }
 
 export abstract class Bot {
-	abstract chooseNextMove(gameState: GameState): Promise<ChooseNextMoveResult>
-	abstract concludeGame(gameState: GameState): Promise<ConcludeGameResult>
+	abstract chooseNextMove(board: Board): Promise<ChooseNextMoveResult>
+	abstract concludeGame(winner: Winner): Promise<ConcludeGameResult>
 }

@@ -1,5 +1,6 @@
 import type { Board } from '../game/model/Board'
 import type { GameState } from '../game/model/GameState'
+import type { Winner } from '../game/model/Player'
 import { OpenAiClient } from '../service/openai/OpenAiClient'
 import { Bot, type BotMood } from './bot'
 
@@ -12,20 +13,20 @@ export class OpenAiBot extends Bot {
 	}
 
 	async chooseNextMove(
-		gameState: GameState,
+		board: Board,
 	): Promise<{ comment: string; move: number; mood: BotMood }> {
-		const prompt = this.getMovePrompt(gameState)
+		const prompt = this.getMovePrompt(board)
 		const response = await this.openaiClient.complete(prompt)
 		return { ...JSON.parse(response), mood: 'happy' }
 	}
 
 	async concludeGame(
-		gameState: GameState,
+		winner: Winner,
 	): Promise<{ comment: string; mood: BotMood }> {
-		const prompt = this.getConcedePrompt(gameState)
+		const prompt = this.getConcedePrompt(winner)
 		return {
 			comment: await this.openaiClient.complete(prompt),
-			mood: gameState.winner === 'o' ? 'happy' : 'sad',
+			mood: winner === 'o' ? 'happy' : 'sad',
 		}
 	}
 
@@ -37,17 +38,17 @@ export class OpenAiBot extends Bot {
         `
 	}
 
-	private getConcedePrompt(gameState: GameState): string {
+	private getConcedePrompt(winner: Winner): string {
 		const state =
-			gameState.winner === 'draw'
+			winner === 'draw'
 				? "It's a draw, and you are appalled by this - totally bamboozled."
-				: gameState.winner === 'x'
+				: winner === 'x'
 					? 'You lost against this noname of a beginner. You are in ruins. Your reputation destroyed. Your family will leave you. Crushed.'
 					: 'Of course you won against this wannabe tic tac toe noob. You take great you in winning and you let the Player know that'
 		return `${this.getPersonalityPrompt()}${state}Explain the result of the game in 2 to 3 sentences in a concise manner.`
 	}
 
-	private getMovePrompt(gameState: GameState): string {
+	private getMovePrompt(board: Board): string {
 		return `${this.getPersonalityPrompt()}You will receive snapshots of a tic tac toe game state encoded like this:
         ${this.encodeBoard(['x', 'o', 'x', undefined, undefined, 'o', 'x', 'o', 'x'])}
         x generally stands for player's moves.
@@ -90,7 +91,7 @@ export class OpenAiBot extends Bot {
 
         or,
         Player:
-        ${this.encodeBoard(gameState.board)}
+        ${this.encodeBoard(board)}
         You:
         `
 	}
@@ -128,7 +129,7 @@ if (import.meta.vitest) {
 				turn: 'o',
 				winner: undefined,
 			}
-			const completion = await bot.chooseNextMove(gameState)
+			const completion = await bot.chooseNextMove(gameState.board)
 			expect('comment' in completion).toBe(true)
 			expect('move' in completion).toBe(true)
 			expect(typeof completion.comment === 'string').toBe(true)
@@ -151,7 +152,7 @@ if (import.meta.vitest) {
 				turn: 'o',
 				winner: undefined,
 			}
-			const completion = await bot.chooseNextMove(gameState)
+			const completion = await bot.chooseNextMove(gameState.board)
 			expect(completion.move).toBe(5)
 		})
 	})
