@@ -1,6 +1,10 @@
-import type { Board } from '../game/model/Board'
-import type { Winner } from '../game/model/Player'
-import { Bot, type BotMood, type ConcludeGameResult } from './bot'
+import type { Board } from '../../shared/model/Board'
+import type { Winner } from '../../shared/model/Player'
+import {
+	Bot,
+	type BotMood,
+	type ConcludeGameResult,
+} from '../../shared/bot/bot'
 
 export class RandomBot extends Bot {
 	override async chooseNextMove(board: Board) {

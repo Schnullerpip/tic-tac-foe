@@ -1,8 +1,8 @@
-import type { Board } from '../game/model/Board'
-import type { GameState } from '../game/model/GameState'
-import type { Winner } from '../game/model/Player'
-import { encodeBoard } from '../service/boardEncoder'
-import { OpenAiClient } from '../service/openai/OpenAiClient'
+import type { Board } from '../model/Board'
+import type { GameState } from '../model/GameState'
+import type { Winner } from '../model/Player'
+import { encodeBoard } from '../public/boardEncoder'
+import { OpenAiClient } from '../services/openai/OpenAiClient'
 import { Bot, type BotMood } from './bot'
 
 export class OpenAiBot extends Bot {

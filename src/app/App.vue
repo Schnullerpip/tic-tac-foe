@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Board from '../board/components/Board.vue'
 import BotComment from '../bot/components/BotComment.vue'
-import { useBot } from '../bot/useBot'
-import { useGameState } from '../game/business/useGameState'
+import { useBot } from '../bot/composables/useBot'
+import { useGameState } from '../game/composables/useGameState'
 import GameOver from '../game/components/GameOver.vue'
 
 const { gameState, makeMove: makePlayerMove } = useGameState()

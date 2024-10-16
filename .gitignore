@@ -1,4 +1,7 @@
+
 dist/
+# api/ is a generated out from the api-src project so we treat it like dist/
+api/
 
 # vercel
 .vercel/

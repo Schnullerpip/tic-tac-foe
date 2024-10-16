@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Cell } from '../../game/model/Board'
+import type { Cell } from '../../../shared/model/Board'
 defineProps<{
 	cell: Cell
 }>()

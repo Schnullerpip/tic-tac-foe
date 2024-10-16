@@ -1,4 +1,4 @@
-import type { Board } from '../game/model/Board'
+import type { Board } from '../model/Board'
 
 export function encodeBoard(board: Board): string {
 	const mappedCells = board.map((cell) => cell ?? 'u')

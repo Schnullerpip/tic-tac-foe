@@ -1,4 +1,4 @@
-import { decodeBoard } from '../src/service/boardEncoder'
+import { decodeBoard } from '../shared/public/boardEncoder'
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url)

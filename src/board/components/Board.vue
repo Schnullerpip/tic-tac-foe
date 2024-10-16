@@ -11,7 +11,7 @@
 </template>
     
 <script setup lang="ts">
-import type { GameState } from '../../game/model/GameState'
+import type { GameState } from '../../../shared/model/GameState'
 import Cell from './Cell.vue'
 defineProps<{ board: GameState['board'] }>()
 const emit = defineEmits<(e: 'clicked-cell', i: number) => void>()

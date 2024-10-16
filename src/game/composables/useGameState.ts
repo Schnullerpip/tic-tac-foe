@@ -3,7 +3,7 @@ import {
 	defaultGameState,
 	makeMove as makeMoveOnGameState,
 	type GameState,
-} from '../model/GameState'
+} from '../../../shared/model/GameState'
 
 export function useGameState() {
 	const gameState = reactive<GameState>(defaultGameState())

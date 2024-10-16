@@ -1,5 +1,5 @@
-import type { Board } from '../game/model/Board'
-import type { Winner } from '../game/model/Player'
+import type { Board } from '../model/Board'
+import type { Winner } from '../model/Player'
 
 export type BotMood = 'neutral' | 'happy' | 'sad'
 export type ChooseNextMoveResult = {

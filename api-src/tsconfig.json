@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ES2020",
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"moduleResolution": "bundler",
+		"isolatedModules": true,
+		"strict": true
+	},
+	"include": ["./**/*.ts", "../shared/**/*.ts"]
+}
