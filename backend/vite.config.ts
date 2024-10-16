@@ -9,8 +9,7 @@ export default defineConfig({
 		ssr: true,
 		rollupOptions: {
 			input: {
-				chooseNextMove: path.resolve(__dirname, 'chooseNextMove.ts'),
-				concludeGame: path.resolve(__dirname, 'concludeGame.ts'),
+				test: path.resolve(__dirname, 'test.ts'),
 			},
 			output: {
 				format: 'esm',
