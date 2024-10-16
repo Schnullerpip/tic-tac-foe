@@ -17,7 +17,6 @@ export default defineConfig({
 				entryFileNames: '[name].mjs',
 				preserveModules: true,
 			},
-			treeshake: false,
 		},
 	},
 })
