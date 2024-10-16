@@ -3,9 +3,7 @@ import type { Board } from '../model/Board'
 export function encodeBoard(board: Board): string {
 	const mappedCells = board.map((cell) => cell ?? 'u')
 	const [a1, a2, a3, b1, b2, b3, c1, c2, c3] = mappedCells
-	return `${a1}|${a2}|${a3}
-        ${b1}|${b2}|${b3}
-        ${c1}|${c2}|${c3}`
+	return `${a1}|${a2}|${a3}\n${b1}|${b2}|${b3}\n${c1}|${c2}|${c3}`
 }
 
 export function decodeBoard(encodedBoard: string): Board {

@@ -6,11 +6,6 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
-		include: [
-			'src/**/*.test.ts',
-			'src/game/model/GameState.ts',
-			'src/service/openai/OpenAiClient.ts',
-			'src/bot/OpenAiBot.ts',
-		],
+		include: ['src/**/*.test.ts'],
 	},
 })
