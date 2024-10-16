@@ -1,6 +1,7 @@
 import type { Board } from '../game/model/Board'
 import type { GameState } from '../game/model/GameState'
 import type { Winner } from '../game/model/Player'
+import { encodeBoard } from '../service/boardEncoder'
 import { OpenAiClient } from '../service/openai/OpenAiClient'
 import { Bot, type BotMood } from './bot'
 
@@ -50,7 +51,7 @@ export class OpenAiBot extends Bot {
 
 	private getMovePrompt(board: Board): string {
 		return `${this.getPersonalityPrompt()}You will receive snapshots of a tic tac toe game state encoded like this:
-        ${this.encodeBoard(['x', 'o', 'x', undefined, undefined, 'o', 'x', 'o', 'x'])}
+        ${encodeBoard(['x', 'o', 'x', undefined, undefined, 'o', 'x', 'o', 'x'])}
         x generally stands for player's moves.
         o are your own moves.
         u are empty fields ready to be played.
@@ -64,7 +65,7 @@ export class OpenAiBot extends Bot {
         YOU MUST ALWAYS PLAY AS o. You don't try to complete the x moves, you always try to win and to make a move that benefits the o fields.
         An interaction with you should look something like this:
         Player:
-        ${this.encodeBoard([undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'x'])}
+        ${encodeBoard([undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'x'])}
         You:
         {
             "comment": "Oh dear, that move was a blunder! A true expert like myself would have played the center field.",
@@ -73,7 +74,7 @@ export class OpenAiBot extends Bot {
 
         or,
         Player:
-        ${this.encodeBoard(['x', 'x', undefined, 'o', 'o', undefined, 'x', undefined, undefined])}
+        ${encodeBoard(['x', 'x', undefined, 'o', 'o', undefined, 'x', undefined, undefined])}
         You:
         {
             "comment": "Don't make me laugh! You could have bested me with the top right corner field - HAHAHAHAHAH!",
@@ -82,7 +83,7 @@ export class OpenAiBot extends Bot {
 
         or,
         Player:
-        ${this.encodeBoard(['o', 'x', undefined, 'x', 'o', undefined, undefined, 'x', undefined])}
+        ${encodeBoard(['o', 'x', undefined, 'x', 'o', undefined, undefined, 'x', undefined])}
         You:
         {
             "comment": "You're not even close to being good at this game! Now I will make the winning move! HAHAHAHAHAH!",
@@ -91,17 +92,9 @@ export class OpenAiBot extends Bot {
 
         or,
         Player:
-        ${this.encodeBoard(board)}
+        ${encodeBoard(board)}
         You:
         `
-	}
-
-	private encodeBoard(board: Board): string {
-		const mappedCells = board.map((cell) => cell ?? 'u')
-		const [a1, a2, a3, b1, b2, b3, c1, c2, c3] = mappedCells
-		return `${a1}|${a2}|${a3}
-        ${b1}|${b2}|${b3}
-        ${c1}|${c2}|${c3}`
 	}
 }
 
