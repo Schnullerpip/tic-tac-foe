@@ -28,7 +28,7 @@ This project is built using:
 The codebase is organized into three main parts:
 
 1. `src`: Frontend code
-2. `api-src`: Backend code
+2. `backend`: Backend code
 3. `shared`: Code shared between frontend and backend
 
 ## Key Features

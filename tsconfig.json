@@ -13,5 +13,5 @@
 
 		"strict": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.vue", "shared/**/*.ts"]
+	"include": ["app/**/*.ts", "app/**/*.vue", "shared/**/*.ts"]
 }
