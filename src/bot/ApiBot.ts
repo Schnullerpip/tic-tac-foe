@@ -8,8 +8,13 @@ import {
 	type ConcludeGameResult,
 } from '../../shared/bot/bot'
 
+const baseUrl =
+	import.meta.env.MODE === 'development'
+		? 'http://localhost:3000'
+		: 'https://tic-tac-foe-lime.vercel.app/'
+
 export class ApiBot extends Bot {
-	private readonly httpClient = new HttpClient('http://localhost:3000') //todo
+	private readonly httpClient = new HttpClient(baseUrl)
 
 	chooseNextMove(board: Board): Promise<ChooseNextMoveResult> {
 		return this.httpClient.get('/api/chooseNextMove', {
