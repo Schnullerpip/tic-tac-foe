@@ -36,7 +36,6 @@ async function handleClickCell(i: number) {
 
 <style scoped>
 .app-root {
-    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
