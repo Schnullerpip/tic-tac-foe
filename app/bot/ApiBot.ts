@@ -8,10 +8,13 @@ import {
 	type ConcludeGameResult,
 } from '../../shared/bot/bot'
 
+// TODO 10
+// 10.1 when you have a running vercel dev server, put its url here
+// 10.2 when you have a domain use it here when MODE is not development
 const baseUrl =
 	import.meta.env.MODE === 'development'
-		? 'http://localhost:3000'
-		: 'https://tic-tac-foe-lime.vercel.app/'
+		? 'well, this string is definitely not a valid url to our locally hosted vercel dev server...'
+		: 'well, this string is definitely not a valid domain in the web...'
 
 export class ApiBot extends Bot {
 	private readonly httpClient = new HttpClient(baseUrl)

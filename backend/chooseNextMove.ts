@@ -1,25 +1,24 @@
-import { OpenAiBot } from '../shared/bot/OpenAiBot'
-import { decodeBoard } from '../shared/public/boardEncoder'
-
 export async function GET(request: Request) {
-	const openaiKey = process.env.OPENAI_API_KEY
-	if (!openaiKey) {
-		throw new Error('Missing OPENAI_API_KEY')
-	}
-	const { searchParams } = new URL(request.url)
-	const boardParam = searchParams.get('board')
+	// TODO 11
+	// 11.1 get your openai key from the right environment
+	// 11.2. get the board parameter from the request
+	// 11.2.1 decode the board
+	// 11.3. create a new OpenAiBot with the openai key
+	// 11.4. call chooseNextMove with the board
+	// 11.5. return the result
 
-	if (!boardParam) {
-		return new Response('Missing board parameter', { status: 400 })
-	}
-
-	const board = decodeBoard(boardParam)
-	const bot = new OpenAiBot(openaiKey)
-	const result = await bot.chooseNextMove(board)
-
-	return new Response(JSON.stringify(result), {
-		headers: {
-			'Content-Type': 'application/json',
+	// TODO 13
+	// 13.1 make the env variable to our hosted version via the vercel web interface
+	return new Response(
+		JSON.stringify({
+			comment: 'Hello World',
+			move: '1',
+			mood: 'happy',
+		}),
+		{
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		},
-	})
+	)
 }

@@ -26,7 +26,7 @@ async function handleClickCell(i: number) {
 
         <!-- Comment -->
         <!-- TODO 2 use the BotComment component here (tip: give it the comment class) -->
-        <!-- TODO 4  use a vue transition for the GameOver component (tip: give it the fade name) (tip: use the mode="out-in" attribute) -->
+        <!-- TODO 4  use a vue transition for the BotComment component (tip: give it the fade name) (tip: use the mode="out-in" attribute) -->
     </div>
 </template>
 
