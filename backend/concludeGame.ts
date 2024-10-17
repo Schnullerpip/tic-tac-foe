@@ -1,29 +1,25 @@
 import { OpenAiBot } from '../shared/bot/OpenAiBot'
 
 export async function GET(request: Request) {
-	const openaiKey = process.env.OPENAI_API_KEY
-	if (!openaiKey) {
-		throw new Error('Missing OPENAI_API_KEY')
-	}
+	// TODO 12
+	// 12.1 get your openai key from the right environment
 
-	const { searchParams } = new URL(request.url)
-	const winnerParam = searchParams.get('winner')
+	// 12.2 get the winner parameter from the request
 
-	if (!winnerParam) {
-		return new Response('Missing winner parameter', { status: 400 })
-	}
-	if (winnerParam !== 'x' && winnerParam !== 'o' && winnerParam !== 'draw') {
-		return new Response('Bad parameter winner', { status: 400 })
-	}
+	// 12.3 create a new OpenAiBot with the openai key
 
-	const winner = winnerParam as 'x' | 'o' | 'draw'
+	// 12.4 call concludeGame with the winner
 
-	const bot = new OpenAiBot(openaiKey)
-	const result = await bot.concludeGame(winner)
-
-	return new Response(JSON.stringify(result), {
-		headers: {
-			'Content-Type': 'application/json',
+	// 12.5 return the result
+	return new Response(
+		JSON.stringify({
+			comment: 'Hello World',
+			mood: 'sad',
+		}),
+		{
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		},
-	})
+	)
 }
