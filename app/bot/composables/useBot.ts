@@ -1,10 +1,12 @@
 import { ref, watch } from 'vue'
 import { type GameState, makeMove } from '../../../shared/model/GameState'
 import type { Bot, BotMood } from '../../../shared/bot/bot'
-import { ApiBot } from '../ApiBot'
+import { OpenAiBot } from '../../../shared/bot/OpenAiBot'
 
+// TODO 10
+// 10.3 use the ApiBot class instead of the OpenAiBot class
 export function useBot(gameState: GameState) {
-	const bot: Bot = new ApiBot()
+	const bot: Bot = new OpenAiBot(import.meta.env.VITE_OPENAI_API_KEY)
 	const comment = ref('')
 	const mood = ref<BotMood>('neutral')
 
