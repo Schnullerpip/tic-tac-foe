@@ -1,12 +1,13 @@
-import { reactive } from 'vue'
 import {
 	defaultGameState,
 	makeMove as makeMoveOnGameState,
-	type GameState,
 } from '../../../shared/model/GameState'
 
+// TODO 1
+// make the game state reactive using vue
+
 export function useGameState() {
-	const gameState = reactive<GameState>(defaultGameState())
+	const gameState = defaultGameState()
 
 	return {
 		gameState,

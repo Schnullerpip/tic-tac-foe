@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Board from './board/components/Board.vue'
-import BotComment from './bot/components/BotComment.vue'
 import { useBot } from './bot/composables/useBot'
-import GameOver from './game/components/GameOver.vue'
 import { useGameState } from './game/composables/useGameState'
 
 const { gameState, makeMove: makePlayerMove } = useGameState()
@@ -20,20 +18,19 @@ async function handleClickCell(i: number) {
 <template>
     <div class="app-root">
         <!-- Game Over -->
-        <transition name="fade">
-            <GameOver class="game-over" :winner="gameState.winner" />
-        </transition>
+        <!-- TODO 3 use the GameOver component here (tip: give it the game-over class) -->
+        <!-- TODO 4 use a vue transition for the GameOver component (tip: give it the fade name) -->
 
         <!-- Board -->
         <Board class="board" :board=gameState.board @clicked-cell="handleClickCell" />
 
         <!-- Comment -->
-         <transition name="fade" mode="out-in">
-            <BotComment class="comment" :comment :mood :key="comment"/>
-         </transition>
+        <!-- TODO 2 use the BotComment component here (tip: give it the comment class) -->
+        <!-- TODO 4  use a vue transition for the GameOver component (tip: give it the fade name) (tip: use the mode="out-in" attribute) -->
     </div>
 </template>
 
+<!-- TODO 4 fix the .fade-enter-active and .fade-leave-active classe - what is the purpose of the fade transition? -->
 <style scoped>
 .app-root {
     height: 100vh;
@@ -69,7 +66,6 @@ async function handleClickCell(i: number) {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s ease;
 }
 
 .fade-enter-from,

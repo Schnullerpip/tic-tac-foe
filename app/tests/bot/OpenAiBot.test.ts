@@ -5,7 +5,7 @@ import type { GameState } from '../../../shared/model/GameState'
 describe('OpenAiBot', () => {
 	let bot: OpenAiBot
 	beforeEach(() => {
-		bot = new OpenAiBot(import.meta.env.VITE_OPENAI_API_KEY)
+		bot = new OpenAiBot('well, this is definitely not an openai api key...')
 	})
 
 	it.skip(
