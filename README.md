@@ -18,7 +18,7 @@ Note that in order to run the program you need to create .env files containing t
 
 The project implements a Tic Tac Toe game with an AI bot (a crappy one) and is deployed on Vercel.
 
-This template should help get you started developing more complex applications with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This template should help get you started developing more complex applications with Vue3 and TypeScript in Vite. The template uses Vue3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 <img width="100" src="https://github.com/user-attachments/assets/a31374c5-2aa8-4b2d-993a-dd424ff76046" />
 
 ## Hosting
