@@ -11,6 +11,10 @@ This is an educational project aimed at getting to know about:
 - Vercel
 
 It also explores project architecture, including a main project and a separate Vite project for backend code bundling. This approach results in a more robust backend compared to typical beginner-level examples.
+This is a complementary repository that implements [this tutorial](https://miro.com/app/board/uXjVLUZjiCY=/).
+
+## Local Development
+Note that in order to run the program you need to create .env files containing the open ai api key - in case i haven't revoked it yet you can find the key in the tutorial.
 
 The project implements a Tic Tac Toe game with an AI bot (a crappy one) and is deployed on Vercel.
 
